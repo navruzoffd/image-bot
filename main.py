@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message
 from google_images_search import GoogleImagesSearch
-from config import BOT_TOKEN, GOOGLE_TOKEN, GOOGLE_CX
+from config import BOT_TOKEN, GOOGLE_TOKEN, GOOGLE_CX, SAVE_IMAGES_DIR
 
 gis = GoogleImagesSearch(GOOGLE_TOKEN, GOOGLE_CX)
 bot = Bot(token = BOT_TOKEN)
@@ -21,7 +21,7 @@ async def search_images(message: Message):
 
     gis.search(search_params = _search_params)
     for image in gis.results():
-        image.download('/home/navruzoffd/Рабочий стол/images_result')
+        image.download(SAVE_IMAGES_DIR)
         await message.reply_photo(image.url)
 
 async def main():
